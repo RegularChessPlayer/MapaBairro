@@ -18,6 +18,7 @@ class Search extends Component {
         query: ''
     }
 
+
     updateQuery = (query) => {
         this.setState({query: query.trim()})
     }
@@ -62,6 +63,7 @@ class Search extends Component {
                 <li key={place.title} className='contact-list-item'>
                     <div className='contact-details'>
                         <p>{place.title}</p>
+                        <button onClick={this.clearQuery}>More Info</button>
                     </div>
                 </li>
             ))}

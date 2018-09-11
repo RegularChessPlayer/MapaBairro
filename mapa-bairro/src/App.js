@@ -9,10 +9,10 @@ class App extends Component {
     //Add more places here if required.
     places:[
         {title: 'Colégio José de Alencar', location: {lat: -3.7196521, lng: -38.5854607}},
-        {title: 'Igreja Assembleia de Deus', location: {lat: -3.7196521, lng:-38.583272}},
+        {title: 'Colégio Dom Quintino', location: {lat: -3.724317, lng: -38.589272}},
         {title: 'Mercado CenterBox', location: {lat: -3.7174681, lng: -38.5811995}},
         {title: 'Farmacia 1', location: {lat: -3.7207799, lng: -38.58343}},
-        {title: 'Farmacia 2', location: {lat: -3.714221, lng: -38.5787095}}
+        {title: 'Farmacia A', location: {lat: -3.7207799, lng: -38.58500}},
         ]
   }
   
