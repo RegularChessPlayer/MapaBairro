@@ -1,44 +1,16 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
-import MapComponent from './Map.js'
-import sortBy from 'sort-by'
 
 class Search extends Component {
-    
-    static propTypes = {
-        places: PropTypes.array.isRequired,
-    }
-    
+      
     componentDidMount(){
         this.setState()
     }
 
-    state = {
-        query: ''
-    }
-
-
-    updateQuery = (query) => {
-        this.setState({query: query.trim()})
-    }
-
-    clearQuery = () => {
-        this.setState({ query: '' })
-    }
-
     render(){
-    const {places} = this.props
-    const {query} = this.state
+    const {showingPlaces, updateQuery, clearQuery, isShowAll, totalPlaces, onMarkerClick} = this.props
+    const {query} = this.props
+    // const {moreInfo} = this.props
     
-    let showingPlaces
-    if (query) {
-        const match = new RegExp(escapeRegExp(query), 'i')
-        showingPlaces = places.filter((place) => match.test(place.title))
-    } else {
-        showingPlaces = places
-    }
-    showingPlaces.sort(sortBy('title'))
     return (
     <div className='List-contacts'>
         <div className='list-contact-top'>
@@ -47,28 +19,27 @@ class Search extends Component {
             type='text'
             placeholder='Search contacts'
             value={query}
-            onChange={(event) => this.updateQuery(event.target.value)}
+            onChange={(event) => updateQuery(event.target.value)}
             />
         </div>
         
-        {showingPlaces.length !== places.length && (
+        {isShowAll && (
           <div className='showing-contacts'>
-            <span>Now showing {showingPlaces.length} of {places.length} total</span>
-            <button onClick={this.clearQuery}>Show all</button>
+            <span>Now showing {showingPlaces.length} of {totalPlaces} total</span>
+            <button onClick={clearQuery}>Show all</button>
           </div>
         )}
 
         <ol className='contact-list'>
-            {showingPlaces.map((place) => ( 
-                <li key={place.title} className='contact-list-item'>
+            {showingPlaces.map((markerInfo) => ( 
+                <li key={markerInfo.title} className='contact-list-item'>
                     <div className='contact-details'>
-                        <p>{place.title}</p>
-                        <button onClick={this.clearQuery}>More Info</button>
+                        <p>{markerInfo.title}</p>
+                        <button onClick={onMarkerClick}>More Info</button>
                     </div>
                 </li>
             ))}
         </ol>
-        <MapComponent placesToDisplay={showingPlaces}/>
         </div>
     )
     }
