@@ -7,7 +7,6 @@ import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 import * as fourSquareAPI from './components/Apis/fourSquareAPI.js';
 
-
 //Handling when  Google's API have any Problem on the request
 document.addEventListener("DOMContentLoaded", function(e) {
   let scriptTag = document.getElementsByTagName('SCRIPT').item(1);
@@ -42,6 +41,19 @@ class App extends Component {
     this.clearQuery = this.clearQuery.bind(this);
     this.onclose = this.onclose.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.moreInfo = this.moreInfo.bind(this);
+  }
+
+  moreInfo = (place) => {
+    console.log(place)
+    
+    this.setState({
+      activeMarker: place,
+      infoWindowVisible: true,
+      likes: 'Loading likes',
+      photo: 'Loading photo'
+      });
+      this.getFourSquareInfo(place.location.lat, place.location.lng, place.title)
   }
 
   onMarkerClick = (markerProperties, markerReference) =>{
@@ -111,7 +123,7 @@ class App extends Component {
     return (
       <div className="App">
         <Search showingPlaces={showingPlaces} updateQuery={this.updateQuery} clearQuery={this.clearQuery}
-                isShowAll = {isShowAll} totalPlaces={this.state.places.length} onMarkerClick={this.onMarkerClick}/>
+                isShowAll = {isShowAll} totalPlaces={this.state.places.length} moreInfo={this.moreInfo}/>
         <MapComponent placesToDisplay={showingPlaces} onclose={this.onclose} 
                       onMarkerClick={this.onMarkerClick} infoWindowVisible={this.state.infoWindowVisible} 
                       likes={this.state.likes} photo={this.state.photo} activeMarker={this.state.activeMarker}/>

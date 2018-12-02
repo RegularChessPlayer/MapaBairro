@@ -7,9 +7,9 @@ class Search extends Component {
     }
 
     render(){
-    const {showingPlaces, updateQuery, clearQuery, isShowAll, totalPlaces, onMarkerClick} = this.props
+    const {showingPlaces, updateQuery, clearQuery, isShowAll, totalPlaces} = this.props
     const {query} = this.props
-    // const {moreInfo} = this.props
+    const {moreInfo} = this.props
     
     return (
     <div className='List-contacts'>
@@ -35,7 +35,7 @@ class Search extends Component {
                 <li key={markerInfo.title} className='contact-list-item'>
                     <div className='contact-details'>
                         <p>{markerInfo.title}</p>
-                        <button onClick={onMarkerClick}>More Info</button>
+                        <button onClick={() => moreInfo(markerInfo)}>More Info</button>
                     </div>
                 </li>
             ))}

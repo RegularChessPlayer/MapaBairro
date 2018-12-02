@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 class MapComponent extends Component {
-
     render() {
+        
         const {onMarkerClick, onClose} = this.props
 
         if (!this.props.loaded) {
